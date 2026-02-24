@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Tracking Order</h2>
+<p>Status: {{ order.status }}</p>
+
+<p>Location: {{ order.latitude }}, {{ order.longitude }}</p>
+
+{% endblock %}

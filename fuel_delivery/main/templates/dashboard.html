@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 style="color:#007bff;">Your Orders</h2>
+
+<p style="text-align:center; font-weight:bold;">
+    Hello, {{ user.username }} 👋
+</p>
+
+{% if orders %}
+<table>
+    <thead>
+        <tr>
+            <th>Fuel Type</th>
+            <th>Liters</th>
+            <th>Status</th>
+            <th>Track</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.fuel_type }}</td>
+            <td>{{ order.liters }} L</td>
+            <td>
+                {% if order.status == "Approved" %}
+                    <span style="color:green; font-weight:bold;">Approved</span>
+                {% elif order.status == "Pending" %}
+                    <span style="color:orange; font-weight:bold;">Pending</span>
+                {% else %}
+                    <span style="color:red; font-weight:bold;">Rejected</span>
+                {% endif %}
+            </td>
+            <td>
+                <a class="track-btn" href="{% url 'track_order' order.id %}">
+                    Track
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <p style="text-align:center; color:gray;">No orders yet.</p>
+{% endif %}
+
+{% endblock %}
